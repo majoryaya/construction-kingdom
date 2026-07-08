@@ -1,0 +1,181 @@
+[gd_scene load_steps=3 format=3 uid="uid://b123xyz"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd"]
+[ext_resource type="Script" path="res://scripts/ui/ui_manager.gd"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("res://scenes/main/main.gd")
+
+[node name="GridSystem" type="Node2D" parent="."]
+position = Vector2(0, 0)
+
+[node name="BuildingContainer" type="Node2D" parent="."]
+name = "BuildingContainer"
+
+[node name="VillagerContainer" type="Node2D" parent="."]
+name = "VillagerContainer"
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 100
+script = ExtResource("res://scripts/ui/ui_manager.gd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer"]
+offset_right = 400.0
+offset_bottom = 200.0
+theme_override_constants/separation = 10
+
+[node name="ResourcePanel" type="PanelContainer" parent="UILayer/VBoxContainer"]
+offset_right = 400.0
+offset_bottom = 80.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qwer")
+
+[node name="ResourceDisplay" type="HBoxContainer" parent="UILayer/VBoxContainer/ResourcePanel"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 72.0
+theme_override_constants/separation = 15
+
+[node name="WoodLabel" type="Label" parent="UILayer/VBoxContainer/ResourcePanel/ResourceDisplay"]
+text = "🌲 Bois: 100"
+theme_override_font_sizes/font_size = 14
+
+[node name="StoneLabel" type="Label" parent="UILayer/VBoxContainer/ResourcePanel/ResourceDisplay"]
+text = "⛏️ Pierre: 50"
+theme_override_font_sizes/font_size = 14
+
+[node name="FoodLabel" type="Label" parent="UILayer/VBoxContainer/ResourcePanel/ResourceDisplay"]
+text = "🍎 Nourriture: 75"
+theme_override_font_sizes/font_size = 14
+
+[node name="GoldLabel" type="Label" parent="UILayer/VBoxContainer/ResourcePanel/ResourceDisplay"]
+text = "💰 Or: 25"
+theme_override_font_sizes/font_size = 14
+
+[node name="ConstructionPanel" type="PanelContainer" parent="UILayer/VBoxContainer"]
+offset_top = 90.0
+offset_right = 400.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_asdf")
+
+[node name="ConstructionMenu" type="HBoxContainer" parent="UILayer/VBoxContainer/ConstructionPanel"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 92.0
+theme_override_constants/separation = 5
+
+[node name="HouseButton" type="Button" parent="UILayer/VBoxContainer/ConstructionPanel/ConstructionMenu"]
+text = "🏠 Maison"
+theme_override_font_sizes/font_size = 12
+
+[node name="FarmButton" type="Button" parent="UILayer/VBoxContainer/ConstructionPanel/ConstructionMenu"]
+text = "🌾 Ferme"
+theme_override_font_sizes/font_size = 12
+
+[node name="LumberButton" type="Button" parent="UILayer/VBoxContainer/ConstructionPanel/ConstructionMenu"]
+text = "🪚 Scierie"
+theme_override_font_sizes/font_size = 12
+
+[node name="MineButton" type="Button" parent="UILayer/VBoxContainer/ConstructionPanel/ConstructionMenu"]
+text = "⛏️ Mine"
+theme_override_font_sizes/font_size = 12
+
+[node name="MarketButton" type="Button" parent="UILayer/VBoxContainer/ConstructionPanel/ConstructionMenu"]
+text = "🛒 Marché"
+theme_override_font_sizes/font_size = 12
+
+[node name="TavernButton" type="Button" parent="UILayer/VBoxContainer/ConstructionPanel/ConstructionMenu"]
+text = "🍺 Taverne"
+theme_override_font_sizes/font_size = 12
+
+[node name="TowerButton" type="Button" parent="UILayer/VBoxContainer/ConstructionPanel/ConstructionMenu"]
+text = "🏰 Tour"
+theme_override_font_sizes/font_size = 12
+
+[node name="RightUIPanel" type="PanelContainer" parent="UILayer"]
+offset_left = 1524.0
+offset_right = 1920.0
+offset_bottom = 400.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ijkl")
+
+[node name="RightVBox" type="VBoxContainer" parent="UILayer/RightUIPanel"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 388.0
+offset_bottom = 392.0
+theme_override_constants/separation = 10
+
+[node name="VillagerLabel" type="Label" parent="UILayer/RightUIPanel/RightVBox"]
+text = "👥 Villageois: 3"
+theme_override_font_sizes/font_size = 16
+
+[node name="ResearchLabel" type="Label" parent="UILayer/RightUIPanel/RightVBox"]
+text = "📚 Recherche: 0"
+theme_override_font_sizes/font_size = 16
+
+[node name="TimeLabel" type="Label" parent="UILayer/RightUIPanel/RightVBox"]
+text = "⏱️ Temps: 0:00"
+theme_override_font_sizes/font_size = 14
+
+[node name="EventLabel" type="Label" parent="UILayer/RightUIPanel/RightVBox"]
+text = "📢 Événement: Aucun"
+theme_override_font_sizes/font_size = 12
+text_overrun_behavior = 2
+
+[node name="GameInfoPanel" type="PanelContainer" parent="UILayer"]
+offset_left = 1524.0
+offset_top = 410.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mnop")
+
+[node name="GameInfoVBox" type="VBoxContainer" parent="UILayer/GameInfoPanel"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 388.0
+offset_bottom = 662.0
+theme_override_constants/separation = 5
+
+[node name="GameStatusTitle" type="Label" parent="UILayer/GameInfoPanel/GameInfoVBox"]
+text = "=== État du Jeu ==="
+theme_override_font_sizes/font_size = 14
+
+[node name="GameStatusInfo" type="RichTextLabel" parent="UILayer/GameInfoPanel/GameInfoVBox"]
+custom_minimum_size = Vector2(0, 200)
+bbcode_enabled = true
+text = "Bâtiments: 1
+Villageois: 3
+Niveau: 1"
+
+[subresource type="StyleBoxFlat" id="StyleBoxFlat_qwer"]
+bg_color = Color(0.2, 0.2, 0.25, 0.8)
+border_color = Color(0.4, 0.4, 0.5, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[subresource type="StyleBoxFlat" id="StyleBoxFlat_asdf"]
+bg_color = Color(0.15, 0.2, 0.25, 0.8)
+border_color = Color(0.4, 0.4, 0.5, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[subresource type="StyleBoxFlat" id="StyleBoxFlat_ijkl"]
+bg_color = Color(0.2, 0.25, 0.3, 0.8)
+border_color = Color(0.4, 0.4, 0.5, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[subresource type="StyleBoxFlat" id="StyleBoxFlat_mnop"]
+bg_color = Color(0.15, 0.2, 0.25, 0.8)
+border_color = Color(0.4, 0.4, 0.5, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2

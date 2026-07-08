@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx456def"]
+
+[ext_resource type="Script" path="res://scenes/characters/villager.gd"]
+
+[node name="Villager" type="CharacterBody2D"]
+script = ExtResource("res://scenes/characters/villager.gd")
+speed = 100.0
+max_health = 100
+max_happiness = 100
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(0.2, 0.6, 0.9, 1)
+
+[node name="Icon" type="Label" parent="."]
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+text = "👤"
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -16.0
+offset_top = -25.0
+offset_right = 16.0
+offset_bottom = -20.0
+value = 100.0
+theme_override_styles/background = SubResource("StyleBoxFlat_h1j2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h1j3")
+
+[node name="HappinessBar" type="ProgressBar" parent="."]
+offset_left = -16.0
+offset_top = 20.0
+offset_right = 16.0
+offset_bottom = 25.0
+value = 50.0
+theme_override_styles/background = SubResource("StyleBoxFlat_h1j4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h1j5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anim_speed_scale = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_j9k8")
+
+[subresource type="StyleBoxFlat" id="StyleBoxFlat_h1j2"]
+bg_color = Color(0.2, 0.2, 0.2, 0.5)
+
+[subresource type="StyleBoxFlat" id="StyleBoxFlat_h1j3"]
+bg_color = Color(0.8, 0.2, 0.2, 1)
+
+[subresource type="StyleBoxFlat" id="StyleBoxFlat_h1j4"]
+bg_color = Color(0.2, 0.2, 0.2, 0.5)
+
+[subresource type="StyleBoxFlat" id="StyleBoxFlat_h1j5"]
+bg_color = Color(0.8, 0.8, 0.2, 1)
+
+[subresource type="CapsuleShape2D" id="CapsuleShape2D_j9k8"]
+radius = 10.0
+height = 32.0
