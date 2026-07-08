@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://c000tutorial"]
+
+[ext_resource type="Script" path="res://scenes/main/main_menu.gd"]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("res://scenes/main/main_menu.gd")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+text = "🏰 Construction Kingdom 🏰"
+theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+horizontal_alignment = 1
+
+[node name="SpacerTop" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+text = "🎮 Nouveau Jeu"
+theme_override_font_sizes/font_size = 24
+
+[node name="LoadGameButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+text = "📂 Charger Jeu"
+theme_override_font_sizes/font_size = 24
+
+[node name="TutorialButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+text = "📖 Tutoriel"
+theme_override_font_sizes/font_size = 24
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+text = "⚙️ Paramètres"
+theme_override_font_sizes/font_size = 24
+
+[node name="AboutButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+text = "❓ À Propos"
+theme_override_font_sizes/font_size = 24
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+text = "🚪 Quitter"
+theme_override_font_sizes/font_size = 24
+
+[node name="VersionLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 50.0
+text = "v1.0.0 - Godot 4.x"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
