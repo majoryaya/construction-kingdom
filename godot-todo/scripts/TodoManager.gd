@@ -1,7 +1,7 @@
 extends Node
 
-# Simple Todo manager with JSON persistence in user://todos.json
-# Each todo is a Dictionary: {"id": int, "text": String, "done": bool}
+# Todo manager with JSON persistence in user://todos.json
+# Each todo is a Dictionary: {"id": int, "text": String, "description": String, "due": String, "done": bool}
 
 var todos: Array = []
 var next_id: int = 1
@@ -10,10 +10,10 @@ const SAVE_PATH := "user://todos.json"
 func _ready() -> void:
 	load_todos()
 
-func add_todo(text: String) -> void:
+func add_todo(text: String, description: String = "", due: String = "") -> void:
 	if text.strip_edges() == "":
 		return
-	var item = {"id": next_id, "text": text, "done": false}
+	var item = {"id": next_id, "text": text, "description": description, "due": due, "done": false}
 	todos.append(item)
 	next_id += 1
 	save_todos()
@@ -33,6 +33,20 @@ func update_todo_text(id: int, new_text: String) -> void:
 	for t in todos:
 		if int(t.get("id")) == id:
 			t["text"] = new_text
+			save_todos()
+			return
+
+func update_todo_description(id: int, new_desc: String) -> void:
+	for t in todos:
+		if int(t.get("id")) == id:
+			t["description"] = new_desc
+			save_todos()
+			return
+
+func update_todo_due(id: int, new_due: String) -> void:
+	for t in todos:
+		if int(t.get("id")) == id:
+			t["due"] = new_due
 			save_todos()
 			return
 
