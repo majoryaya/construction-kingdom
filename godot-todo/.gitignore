@@ -1,0 +1,10 @@
+# Ignore files created by Godot Engine
+
+.import/
+.export/
+.godot/
+*.import
+
+# OS files
+.DS_Store
+Thumbs.db

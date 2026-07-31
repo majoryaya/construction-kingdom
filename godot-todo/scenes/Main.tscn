@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=4]
+
+[ext_resource path="res://scripts/TodoManager.gd" type="Script" id=1]
+[ext_resource path="res://scripts/MainUI.gd" type="Script" id=2]
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="TodoManager" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="AddBar" type="HBoxContainer" parent="."]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 12.0
+
+[node name="Input" type="LineEdit" parent="AddBar"]
+placeholder_text = "Nouvelle tâche..."
+
+[node name="AddButton" type="Button" parent="AddBar"]
+text = "Ajouter"
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 60.0
+margin_right = 12.0
+margin_bottom = 12.0
+
+[node name="List" type="VBoxContainer" parent="Scroll"]
+
+[node name="ClearAll" type="Button" parent="."]
+text = "Supprimer tout"
+margin_left = 12.0
+margin_top = 44.0
+
