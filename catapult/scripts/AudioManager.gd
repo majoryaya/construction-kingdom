@@ -8,8 +8,10 @@ class_name AudioManager
 @export var sfx_bus_name: String = "SFX"
 @export var master_bus_name: String = "Master"
 
+# Streams assignable in the Autoload inspector
 @export var sfx_slingshot_stretch: AudioStream
 @export var sfx_bird_launch: AudioStream
+@export var sfx_ambience: AudioStream
 @export var music_background: AudioStream
 
 var _sfx_player: AudioStreamPlayer
@@ -29,6 +31,8 @@ func _ready() -> void:
 	_music_player.loop = true
 	add_child(_music_player)
 
+# Play a named SFX. If position is provided, a AudioStreamPlayer2D is spawned and freed after playback.
+# pitch_variation: fraction variation (0.1 => pitch in [0.9,1.1]).
 func play_sfx(name: String, position: Vector2 = null, pitch_variation: float = 0.0) -> void:
 	var stream: AudioStream = _get_stream_by_name(name)
 	if stream == null:
@@ -48,9 +52,19 @@ func play_sfx(name: String, position: Vector2 = null, pitch_variation: float = 0
 		p.position = position
 		p.pitch_scale = pitch
 		add_child(p)
-		p.connect("finished", Callable(p, "queue_free"))
+		# AudioStreamPlayer2D does not emit "finished" in Godot 4; use a timer to free after length if available
 		p.play()
+		# schedule free after approximate length if available
+		if p.stream is AudioStreamSample:
+			var dur = (p.stream as AudioStreamSample).get_length()
+			await get_tree().create_timer(dur + 0.1).timeout
+		else:
+			# fallback small delay
+			await get_tree().create_timer(2.0).timeout
+		if is_instance_valid(p):
+			p.queue_free()
 
+# Start a looping SFX by name. Stored in _looping_players to allow pitch/modulation and stop later.
 func start_looping_sfx(name: String) -> void:
 	if _looping_players.has(name):
 		return
@@ -66,6 +80,7 @@ func start_looping_sfx(name: String) -> void:
 	p.play()
 	_looping_players[name] = p
 
+# Stop and free a looping SFX
 func stop_looping_sfx(name: String) -> void:
 	if not _looping_players.has(name):
 		return
@@ -75,12 +90,14 @@ func stop_looping_sfx(name: String) -> void:
 		p.queue_free()
 	_looping_players.erase(name)
 
+# Adjust pitch of an active looping SFX
 func set_loop_pitch(name: String, pitch: float) -> void:
 	if _looping_players.has(name):
 		var p := _looping_players[name]
 		if is_instance_valid(p):
 			p.pitch_scale = pitch
 
+# Music control
 func play_music(stream: AudioStream = null, loop: bool = true) -> void:
 	if stream != null:
 		_music_player.stream = stream
@@ -90,11 +107,14 @@ func play_music(stream: AudioStream = null, loop: bool = true) -> void:
 func stop_music() -> void:
 	_music_player.stop()
 
+# Helper mapping
 func _get_stream_by_name(name: String) -> AudioStream:
 	match name:
 		"slingshot_stretch":
 			return sfx_slingshot_stretch
 		"bird_launch":
 			return sfx_bird_launch
+		"ambience":
+			return sfx_ambience
 		_:
 			return null
